@@ -344,7 +344,6 @@ class Trainer:
                     
         return outputs
 
-
     def generate_images_pred(self, inputs, outputs):
         """Generate the warped (reprojected) color images for a minibatch.
         Generated images are saved into the `outputs` dictionary.
@@ -458,7 +457,6 @@ class Trainer:
         losses["loss"] = total_loss
         return losses
     
-
     def val(self):
         """Validate the model on a single minibatch
         """

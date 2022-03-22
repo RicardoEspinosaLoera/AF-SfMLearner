@@ -353,7 +353,6 @@ train_dataset frame_001267 l
 train_dataset frame_001268 l
 train_dataset frame_001269 l
 train_dataset frame_001270 l
-train_dataset frame_001271 l
 train_dataset frame_001272 l
 train_dataset frame_001273 l
 train_dataset frame_001274 l

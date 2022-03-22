@@ -139,11 +139,13 @@ class MonoDataset(data.Dataset):
         folder = line[0]
         
         
-        
+        """
         if len(line) == 3:
             frame_index = int(line[1])
         else:
             frame_index = 0
+        """
+        frame_index = int(line[1].split('_')[1])
 
         if len(line) == 3:
             side = line[2]

@@ -89,7 +89,7 @@ class MonoDataset(data.Dataset):
         images in this item. This ensures that all images input to the pose network receive the
         same augmentation.
         """
-        print(color_aug.shape)
+        
         for k in list(inputs):
             frame = inputs[k]
             if "color" in k:
@@ -172,6 +172,8 @@ class MonoDataset(data.Dataset):
                 self.brightness, self.contrast, self.saturation, self.hue)
         else:
             color_aug = (lambda x: x)
+        
+        print(type(color_aug))
 
         self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:

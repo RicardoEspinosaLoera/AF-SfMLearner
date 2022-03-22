@@ -424,7 +424,6 @@ train_dataset frame_001339 l
 train_dataset frame_001340 l
 train_dataset frame_001341 l
 train_dataset frame_001342 l
-train_dataset frame_001343 l
 train_dataset frame_001344 l
 train_dataset frame_001345 l
 train_dataset frame_001346 l

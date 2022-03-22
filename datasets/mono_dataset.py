@@ -138,7 +138,7 @@ class MonoDataset(data.Dataset):
         line = self.filenames[index].split()
         folder = line[0]
         
-        """print(line)
+        
         
         if len(line) == 3:
             frame_index = int(line[1])
@@ -149,8 +149,8 @@ class MonoDataset(data.Dataset):
             side = line[2]
         else:
             side = None
-        """
-        
+        print(frame_index)
+
         for i in self.frame_idxs:
             if i == "s":
                 other_side = {"r": "l", "l": "r"}[side]

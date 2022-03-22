@@ -144,14 +144,16 @@ class MonoDataset(data.Dataset):
             frame_index = int(line[1])
         else:
             frame_index = 0
+        
         """
-        frame_index = int(line[1].split('_')[1])
+        frame_index = line[1]
+
 
         if len(line) == 3:
             side = line[2]
         else:
             side = None
-        print(frame_index)
+
 
         for i in self.frame_idxs:
             if i == "s":

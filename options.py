@@ -28,8 +28,8 @@ class MonodepthOptions:
         self.parser.add_argument("--split",
                                  type=str,
                                  help="which training split to use",
-                                 choices=["endovis", "eigen_zhou", "eigen_full", "odom", "benchmark"],
-                                 default="endovis")
+                                 choices=["endovis", "eigen_zhou", "eigen_full", "odom", "benchmark","localtest"],
+                                 default="localtest")
         self.parser.add_argument("--num_layers",
                                  type=int,
                                  help="number of resnet layers",
@@ -164,6 +164,7 @@ class MonodepthOptions:
         self.parser.add_argument("--load_weights_folder",
                                  type=str,
                                  help="name of model to load")
+
         self.parser.add_argument("--models_to_load",
                                  nargs="+",
                                  type=str,

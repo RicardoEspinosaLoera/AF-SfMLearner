@@ -89,6 +89,7 @@ class MonoDataset(data.Dataset):
         images in this item. This ensures that all images input to the pose network receive the
         same augmentation.
         """
+        print(color_aug)
         for k in list(inputs):
             frame = inputs[k]
             if "color" in k:
@@ -102,7 +103,7 @@ class MonoDataset(data.Dataset):
                 n, im, i = k
                 inputs[(n, im, i)] = self.to_tensor(f)
                 #print(color_aug(f))
-                #inputs[(n + "_aug", im, i)] = self.to_tensor(color_aug(f))
+                inputs[(n + "_aug", im, i)] = self.to_tensor(color_aug(f))
 
     def __len__(self):
         return len(self.filenames)
@@ -176,7 +177,7 @@ class MonoDataset(data.Dataset):
         self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:
             del inputs[("color", i, -1)]
-            #del inputs[("color_aug", i, -1)]
+            del inputs[("color_aug", i, -1)]
 
         if self.load_depth:
             depth_gt = self.get_depth(folder, frame_index, side, do_flip)

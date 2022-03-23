@@ -1,4 +1,3 @@
-train_dataset frame_001267 l
 train_dataset frame_001268 l
 train_dataset frame_001269 l
 train_dataset frame_001270 l

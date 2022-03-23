@@ -167,19 +167,18 @@ class MonoDataset(data.Dataset):
             inputs[("K", scale)] = torch.from_numpy(K)
             inputs[("inv_K", scale)] = torch.from_numpy(inv_K)
 
-        """
+        
         if do_color_aug:
-            color_aug = transforms.ColorJitter.get_params(
-                self.brightness, self.contrast, self.saturation, self.hue)
+            color_aug = transforms.ColorJitter( self.brightness, self.contrast, self.saturation, self.hue)
         else:
             color_aug = (lambda x: x)
-        """
+        
         #print(type(color_aug))
 
-        #self.preprocess(inputs, color_aug)
+        self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:
             del inputs[("color", i, -1)]
-            #del inputs[("color_aug", i, -1)]
+            del inputs[("color_aug", i, -1)]
 
         if self.load_depth:
             depth_gt = self.get_depth(folder, frame_index, side, do_flip)

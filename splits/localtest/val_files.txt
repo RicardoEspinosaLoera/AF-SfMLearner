@@ -11,7 +11,6 @@ train_dataset frame_001276 l
 train_dataset frame_001277 l
 train_dataset frame_001278 l
 train_dataset frame_001279 l
-train_dataset frame_001280 l
 train_dataset frame_001281 l
 train_dataset frame_001282 l
 train_dataset frame_001283 l

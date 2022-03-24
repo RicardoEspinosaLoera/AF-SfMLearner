@@ -302,8 +302,6 @@ class Trainer:
                     inputs_all = [pose_feats[f_i], pose_feats[0]]
                     inputs_all_reverse = [pose_feats[0], pose_feats[f_i]]
                     print("predict_poses")
-                    print(inputs_all.shape)
-                    print(inputs_all_reverse.shape)
                     print(inputs_all)
                     print(inputs_all_reverse)
                     # position

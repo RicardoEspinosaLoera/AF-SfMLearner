@@ -301,21 +301,21 @@ class Trainer:
                     
                     inputs_all = [pose_feats[f_i], pose_feats[0]]
                     inputs_all_reverse = [pose_feats[0], pose_feats[f_i]]
-                    print("predict_poses")
-                    print(len(inputs_all))
-                    print(len(inputs_all_reverse))
+                    
                     # position
                     position_inputs = self.models["position_encoder"](torch.cat(inputs_all, 1))
                     position_inputs_reverse = self.models["position_encoder"](torch.cat(inputs_all_reverse, 1))
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
+                    print(outputs_0.shape)
+                    print(outputs_1.shape)
                     for scale in self.opt.scales:
 
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
-                        #OF 
+ 
                         outputs[("registration", scale, f_i)] = self.spatial_transform(inputs[("color", f_i, 0)], outputs[("position", "high", scale, f_i)])
 
                         outputs[("position_reverse", scale, f_i)] = outputs_1[("position", scale)]

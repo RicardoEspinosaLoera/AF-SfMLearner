@@ -394,7 +394,12 @@ class Trainer:
                     inputs[("color", frame_id, source_scale)],
                     outputs[("sample", frame_id, scale)],
                     padding_mode="border")
-
+                print("Cam points")
+                print(cam_points)
+                print("K")
+                print(inputs[("K", source_scale)])
+                print("T")
+                print(T)
                 outputs[("position_depth", scale, frame_id)] = self.position_depth[source_scale](
                         cam_points, inputs[("K", source_scale)], T)
                 print(outputs[("position_depth", scale, frame_id)][0].shape)

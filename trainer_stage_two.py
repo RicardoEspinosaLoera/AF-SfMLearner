@@ -398,7 +398,7 @@ class Trainer:
                     inputs[("color", frame_id, source_scale)],
                     outputs[("sample", frame_id, scale)],
                     padding_mode="border")
-                print("Cam points")
+                """print("Cam points")
                 print(cam_points.shape)
                 print("K")
                 print(inputs[("K", source_scale)].shape)
@@ -407,7 +407,7 @@ class Trainer:
                 outputs[("position_depth", scale, frame_id)] = self.position_depth[source_scale](
                         cam_points, inputs[("K", source_scale)], T)
                 print(outputs[("position_depth", scale, frame_id)][0].shape)
-                print(outputs[("position_depth", scale, frame_id)][0])
+                print(outputs[("position_depth", scale, frame_id)][0])"""
                 
     def compute_reprojection_loss(self, pred, target):
 

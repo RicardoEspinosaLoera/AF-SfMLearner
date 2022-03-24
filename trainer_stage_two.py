@@ -150,9 +150,10 @@ class Trainer:
             self.ssim = SSIM()
             self.ssim.to(self.device)
 
+        #Spatial Transformer -> Input OF Forward -> Output Recontructed Frame
         self.spatial_transform = SpatialTransformer((self.opt.height, self.opt.width))
         self.spatial_transform.to(self.device)
-
+        #Range map Check -> Input OF Backward -> Output Visibility Mask
         self.get_occu_mask_backward = get_occu_mask_backward((self.opt.height, self.opt.width))
         self.get_occu_mask_backward.to(self.device)
 
@@ -310,6 +311,7 @@ class Trainer:
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
+                        #OF 
                         outputs[("registration", scale, f_i)] = self.spatial_transform(inputs[("color", f_i, 0)], outputs[("position", "high", scale, f_i)])
 
                         outputs[("position_reverse", scale, f_i)] = outputs_1[("position", scale)]
@@ -395,6 +397,7 @@ class Trainer:
 
                 outputs[("position_depth", scale, frame_id)] = self.position_depth[source_scale](
                         cam_points, inputs[("K", source_scale)], T)
+                print(outputs[("position_depth", scale, frame_id)])
                 
     def compute_reprojection_loss(self, pred, target):
 

@@ -308,24 +308,29 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    print(len(outputs_0))
-                    print(len(outputs_1))
+                    #print(len(outputs_0))
+                    #print(len(outputs_1))
                     for scale in self.opt.scales:
-
+                        #Pose estimation outputs 0
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
- 
+                        
+                        #OF prediction
                         outputs[("registration", scale, f_i)] = self.spatial_transform(inputs[("color", f_i, 0)], outputs[("position", "high", scale, f_i)])
-
+                        print(scale)
+                        print(f_i)
+                        print(outputs[("registration", scale, f_i)].shape)
+                        #Pose estimation outputs 0
                         outputs[("position_reverse", scale, f_i)] = outputs_1[("position", scale)]
                         outputs[("position_reverse", "high", scale, f_i)] = F.interpolate(
                             outputs[("position_reverse", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
+                        
                         outputs[("occu_mask_backward", scale, f_i)],  outputs[("occu_map_backward", scale, f_i)]= self.get_occu_mask_backward(outputs[("position_reverse", "high", scale, f_i)])
                         outputs[("occu_map_bidirection", scale, f_i)] = self.get_occu_mask_bidirection(outputs[("position", "high", scale, f_i)],
                                                                                                           outputs[("position_reverse", "high", scale, f_i)])
 
-                    # transform
+                    # transform 
                     transform_input = [outputs[("registration", 0, f_i)], inputs[("color", 0, 0)]]
                     transform_inputs = self.models["transform_encoder"](torch.cat(transform_input, 1))
                     outputs_2 = self.models["transform"](transform_inputs)
@@ -335,6 +340,7 @@ class Trainer:
                         outputs[("transform", scale, f_i)] = outputs_2[("transform", scale)]
                         outputs[("transform", "high", scale, f_i)] = F.interpolate(
                             outputs[("transform", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
+
                         outputs[("refined", scale, f_i)] = (outputs[("transform", "high", scale, f_i)] * outputs[("occu_mask_backward", 0, f_i)].detach()  + inputs[("color", 0, 0)])
                         outputs[("refined", scale, f_i)] = torch.clamp(outputs[("refined", scale, f_i)], min=0.0, max=1.0)
 

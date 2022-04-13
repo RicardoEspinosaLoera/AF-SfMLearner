@@ -124,7 +124,7 @@ class Trainer:
 
         # data
         datasets_dict = {"localtest": datasets.SCAREDRAWDataset}
-        print(datasets_dict)
+        #print(datasets_dict)
         self.dataset = datasets_dict[self.opt.dataset]
 
         fpath = os.path.join(os.path.dirname(__file__), "splits", self.opt.split, "{}_files.txt")

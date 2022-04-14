@@ -308,8 +308,8 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    print(outputs_0['position', 0].shape)
-                    print(len(outputs_1))
+                    print(outputs_0['position', 0][0].shape)
+                    #print(len(outputs_1))
                     for scale in self.opt.scales:
                         #OG prediction
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]

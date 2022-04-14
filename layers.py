@@ -521,6 +521,19 @@ class get_occu_mask_bidirection(nn.Module):
         
         return flow12_diff
 
+class get_OF_Calculation(nn.Module):
+
+    def __init__(self, size):
+        super(get_OF_Calculation, self).__init__()
+
+
+
+    def forward(self, I1, I2):
+        
+        
+        
+        return flow
+
 
 class match(nn.Module):
 

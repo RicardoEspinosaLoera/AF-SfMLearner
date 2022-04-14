@@ -308,10 +308,11 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    print(outputs_0[0].shape)
-                    print(outputs_1[0].shape)
+                    #print(outputs_0[0].shape)
+                    #print(outputs_1[0].shape)
                     for scale in self.opt.scales:
                         #Pose estimation outputs 0
+                        print(scale)
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)

@@ -308,8 +308,8 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    #print(len(outputs_0))
-                    #print(len(outputs_1))
+                    print(outputs_0[0].shape)
+                    print(outputs_1[0].shape)
                     for scale in self.opt.scales:
                         #Pose estimation outputs 0
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
@@ -333,7 +333,7 @@ class Trainer:
 
                     # transform 
                     transform_input = [outputs[("registration", 0, f_i)], inputs[("color", 0, 0)]]
-                    print(transform_input[0].shape)
+                    #print(transform_input[0].shape)
                     transform_inputs = self.models["transform_encoder"](torch.cat(transform_input, 1))
                     outputs_2 = self.models["transform"](transform_inputs)
 

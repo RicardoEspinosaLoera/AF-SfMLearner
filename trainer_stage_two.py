@@ -333,7 +333,7 @@ class Trainer:
 
                     # transform 
                     transform_input = [outputs[("registration", 0, f_i)], inputs[("color", 0, 0)]]
-                    print(transform_input.shape)
+                    print(transform_input[0].shape)
                     transform_inputs = self.models["transform_encoder"](torch.cat(transform_input, 1))
                     outputs_2 = self.models["transform"](transform_inputs)
 

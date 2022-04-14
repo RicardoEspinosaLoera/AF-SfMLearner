@@ -305,11 +305,14 @@ class Trainer:
                     # position
                     position_inputs = self.models["position_encoder"](torch.cat(inputs_all, 1))
                     position_inputs_reverse = self.models["position_encoder"](torch.cat(inputs_all_reverse, 1))
+
+                    print(position_inputs.shape)
+
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    print(outputs_0['position', 0][0][0].shape)
-                    print(outputs_0['position', 0][0][1].shape)
+                    #print(outputs_0['position', 0][0][0].shape)
+                    #print(outputs_0['position', 0][0][1].shape)
                     #print(len(outputs_1))
                     for scale in self.opt.scales:
                         #OG prediction

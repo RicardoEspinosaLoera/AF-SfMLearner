@@ -308,23 +308,14 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    print(len(outputs_0))
+                    print(outputs_0[0].shape)
                     print(len(outputs_1))
                     for scale in self.opt.scales:
-                        #Pose estimation outputs 0
+                        #OG prediction
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)
-                        #print(outputs[("position", scale, f_i)])
-                        #print()
-                        #print(outputs[("position", "high", scale, f_i)])
-                        #OF prediction
                         outputs[("registration", scale, f_i)] = self.spatial_transform(inputs[("color", f_i, 0)], outputs[("position", "high", scale, f_i)])
-                        #print(scale)
-                        #print(f_i)
-                        #print(outputs[("registration", scale, f_i)].shape)
-                        #print(inputs[("color", f_i, 0)].shape)
-                        #Pose estimation outputs 0
                         outputs[("position_reverse", scale, f_i)] = outputs_1[("position", scale)]
                         outputs[("position_reverse", "high", scale, f_i)] = F.interpolate(
                             outputs[("position_reverse", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)

@@ -320,8 +320,8 @@ class Trainer:
                         outputs[("registration", scale, f_i)] = self.spatial_transform(inputs[("color", f_i, 0)], outputs[("position", "high", scale, f_i)])
                         #print(scale)
                         #print(f_i)
-                        print(outputs[("registration", scale, f_i)].shape)
-                        print(inputs[("color", f_i, 0)].shape)
+                        #print(outputs[("registration", scale, f_i)].shape)
+                        #print(inputs[("color", f_i, 0)].shape)
                         #Pose estimation outputs 0
                         outputs[("position_reverse", scale, f_i)] = outputs_1[("position", scale)]
                         outputs[("position_reverse", "high", scale, f_i)] = F.interpolate(
@@ -333,6 +333,7 @@ class Trainer:
 
                     # transform 
                     transform_input = [outputs[("registration", 0, f_i)], inputs[("color", 0, 0)]]
+                    print(transform_input.shape)
                     transform_inputs = self.models["transform_encoder"](torch.cat(transform_input, 1))
                     outputs_2 = self.models["transform"](transform_inputs)
 

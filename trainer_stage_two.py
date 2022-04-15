@@ -270,10 +270,8 @@ class Trainer:
             outputs = self.models["depth"](features[0])
         else:
             # Otherwise, we only feed the image with frame_id 0 through the depth encoder
-            print("process_batch inputs",len(inputs))
-            print(inputs['K', 0].shape)
-            print(inputs['color', 0, 0].shape)
-            print(inputs['color_aug', 0, 0].shape)
+            
+            #DepthNet Prediction
             features = self.models["encoder"](inputs["color_aug", 0, 0])
             outputs = self.models["depth"](features)
         
@@ -318,8 +316,8 @@ class Trainer:
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
 
-                    #print(outputs_0['position', 0][0][0].shape)
-                    #print(outputs_0['position', 0][0][1].shape)
+                    print(outputs_0['position', 0][0][0].shape)
+                    print(outputs_1['position', 0][0][1].shape)
                     #print(len(outputs_1))
                     for scale in self.opt.scales:
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]

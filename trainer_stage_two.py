@@ -254,7 +254,7 @@ class Trainer:
         """
         for key, ipt in inputs.items():
             inputs[key] = ipt.to(self.device)
-        print("process_batch inputs",len(inputs))
+        
         #Not used
         if self.opt.pose_model_type == "shared":
             # If we are using a shared encoder for both depth and pose (as advocated
@@ -270,6 +270,7 @@ class Trainer:
             outputs = self.models["depth"](features[0])
         else:
             # Otherwise, we only feed the image with frame_id 0 through the depth encoder
+            print("process_batch inputs",len(inputs))
             features = self.models["encoder"](inputs["color_aug", 0, 0])
             outputs = self.models["depth"](features)
         

@@ -315,9 +315,10 @@ class Trainer:
 
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
-
-                    print(outputs_0['position', 0][0][0].shape)
-                    print(outputs_1['position', 0][0][1].shape)
+                    for i in outputs_0.keys():
+                        print(i)
+                    #print(outputs_0['position', 0][0][0].shape)
+                    #print(outputs_1['position', 0][0][1].shape)
                     #print(len(outputs_1))
                     for scale in self.opt.scales:
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]

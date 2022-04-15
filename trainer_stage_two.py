@@ -313,7 +313,7 @@ class Trainer:
                     position_inputs_reverse = self.models["position_encoder"](torch.cat(inputs_all_reverse, 1))
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
-                    print(len(outputs_0))
+                    print(outputs_0['position', 0].shape)
                     #print(outputs_1['position', 0][0][1].shape)
                     #print(len(outputs_1))
                     for scale in self.opt.scales:

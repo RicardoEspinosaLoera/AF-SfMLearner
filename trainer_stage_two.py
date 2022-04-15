@@ -226,7 +226,7 @@ class Trainer:
         self.set_train()
 
         for batch_idx, inputs in enumerate(self.train_loader):
-            print("run_epcoh",len(inputs))
+            
             before_op_time = time.time()
 
             outputs, losses = self.process_batch(inputs)
@@ -254,7 +254,7 @@ class Trainer:
         """
         for key, ipt in inputs.items():
             inputs[key] = ipt.to(self.device)
-        
+        print("process_batch inputs",len(inputs))
         #Not used
         if self.opt.pose_model_type == "shared":
             # If we are using a shared encoder for both depth and pose (as advocated
@@ -274,8 +274,8 @@ class Trainer:
             outputs = self.models["depth"](features)
         
         #Not used
-        if self.opt.predictive_mask:
-            outputs["predictive_mask"] = self.models["predictive_mask"](features)
+        #if self.opt.predictive_mask:
+        #    outputs["predictive_mask"] = self.models["predictive_mask"](features)
 
         if self.use_pose_net:
             outputs.update(self.predict_poses(inputs, features, outputs))

@@ -150,10 +150,10 @@ class Trainer:
             self.ssim = SSIM()
             self.ssim.to(self.device)
 
-        #Spatial Transformer -> Input OF Forward -> Output Recontructed Frame
+
         self.spatial_transform = SpatialTransformer((self.opt.height, self.opt.width))
         self.spatial_transform.to(self.device)
-        #Range map Check -> Input OF Backward -> Output Visibility Mask
+
         self.get_occu_mask_backward = get_occu_mask_backward((self.opt.height, self.opt.width))
         self.get_occu_mask_backward.to(self.device)
 
@@ -301,8 +301,11 @@ class Trainer:
                     
                     inputs_all = [pose_feats[f_i], pose_feats[0]]
                     inputs_all_reverse = [pose_feats[0], pose_feats[f_i]]
+
+                    print(inputs_all.shape)
+                    print(inputs_all.shape)
                     
-                    # position
+                    # OF Prediction
                     position_inputs = self.models["position_encoder"](torch.cat(inputs_all, 1))
                     position_inputs_reverse = self.models["position_encoder"](torch.cat(inputs_all_reverse, 1))
 
@@ -315,7 +318,6 @@ class Trainer:
                     #print(outputs_0['position', 0][0][1].shape)
                     #print(len(outputs_1))
                     for scale in self.opt.scales:
-                        #OG prediction
                         outputs[("position", scale, f_i)] = outputs_0[("position", scale)]
                         outputs[("position", "high", scale, f_i)] = F.interpolate(
                             outputs[("position", scale, f_i)], [self.opt.height, self.opt.width], mode="bilinear", align_corners=False)

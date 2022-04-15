@@ -271,7 +271,9 @@ class Trainer:
         else:
             # Otherwise, we only feed the image with frame_id 0 through the depth encoder
             print("process_batch inputs",len(inputs))
-            print(inputs)
+            print(inputs['K'].shape)
+            print(inputs['color'].shape)
+            print(inputs['color_aug'].shape)
             features = self.models["encoder"](inputs["color_aug", 0, 0])
             outputs = self.models["depth"](features)
         

@@ -296,7 +296,7 @@ class Trainer:
                 pose_feats = {f_i: features[f_i] for f_i in self.opt.frame_ids}
             else:
                 pose_feats = {f_i: inputs["color_aug", f_i, 0] for f_i in self.opt.frame_ids}
-
+            print(len(pose_feats))
             for f_i in self.opt.frame_ids[1:]:
 
                 if f_i != "s":
@@ -315,8 +315,6 @@ class Trainer:
 
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)
-                    for i in outputs_0.keys():
-                        print(i)
                     #print(outputs_0['position', 0][0][0].shape)
                     #print(outputs_1['position', 0][0][1].shape)
                     #print(len(outputs_1))
@@ -333,9 +331,9 @@ class Trainer:
                         outputs[("occu_map_bidirection", scale, f_i)] = self.get_occu_mask_bidirection(outputs[("position", "high", scale, f_i)],
                                                                                                           outputs[("position_reverse", "high", scale, f_i)])
 
-                    # transform 
+                    # Input for the AFNet
                     transform_input = [outputs[("registration", 0, f_i)], inputs[("color", 0, 0)]]
-                    #print(transform_input[0].shape)
+                    # Output from AFNet
                     transform_inputs = self.models["transform_encoder"](torch.cat(transform_input, 1))
                     outputs_2 = self.models["transform"](transform_inputs)
 

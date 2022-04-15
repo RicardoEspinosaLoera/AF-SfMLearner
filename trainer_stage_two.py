@@ -296,11 +296,11 @@ class Trainer:
                 pose_feats = {f_i: features[f_i] for f_i in self.opt.frame_ids}
             else:
                 pose_feats = {f_i: inputs["color_aug", f_i, 0] for f_i in self.opt.frame_ids}
-            print(pose_feats[0].shape)
-            print(pose_feats[-1].shape)
-            print(pose_feats[1].shape)
+            #print(pose_feats[0].shape)
+            #print(pose_feats[-1].shape)
+            #print(pose_feats[1].shape)
             for f_i in self.opt.frame_ids[1:]:
-
+                print(f_i)
                 if f_i != "s":
                     
                     inputs_all = [pose_feats[f_i], pose_feats[0]]
@@ -348,7 +348,7 @@ class Trainer:
                         outputs[("refined", scale, f_i)] = (outputs[("transform", "high", scale, f_i)] * outputs[("occu_mask_backward", 0, f_i)].detach()  + inputs[("color", 0, 0)])
                         outputs[("refined", scale, f_i)] = torch.clamp(outputs[("refined", scale, f_i)], min=0.0, max=1.0)
 
-                    # pose
+                    # Input for PoseNet
                     pose_inputs = [self.models["pose_encoder"](torch.cat(inputs_all, 1))]
                     axisangle, translation = self.models["pose"](pose_inputs)
 

@@ -296,9 +296,9 @@ class Trainer:
                 pose_feats = {f_i: features[f_i] for f_i in self.opt.frame_ids}
             else:
                 pose_feats = {f_i: inputs["color_aug", f_i, 0] for f_i in self.opt.frame_ids}
-            print(pose_feats['color_aug',0].shape)
-            print(pose_feats['color_aug',-1].shape)
-            print(pose_feats['color_aug',1].shape)
+            print(pose_feats[0].shape)
+            print(pose_feats[-1].shape)
+            print(pose_feats[1].shape)
             for f_i in self.opt.frame_ids[1:]:
 
                 if f_i != "s":

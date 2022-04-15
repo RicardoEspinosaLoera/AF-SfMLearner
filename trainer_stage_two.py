@@ -306,7 +306,7 @@ class Trainer:
                     inputs_all_reverse = [pose_feats[0], pose_feats[f_i]]
 
                     print("inputs_all",torch.cat(inputs_all, 1).shape)
-                    print("inputs_all_reverse",torch.cat(inputs_all_reverse, 1.shape)
+                    print("inputs_all_reverse",torch.cat(inputs_all_reverse, 1).shape)
                     
                     # OF Prediction
                     position_inputs = self.models["position_encoder"](torch.cat(inputs_all, 1))

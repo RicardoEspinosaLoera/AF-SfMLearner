@@ -226,7 +226,7 @@ class Trainer:
         self.set_train()
 
         for batch_idx, inputs in enumerate(self.train_loader):
-
+            print("run_epcoh",len(inputs))
             before_op_time = time.time()
 
             outputs, losses = self.process_batch(inputs)
@@ -302,14 +302,14 @@ class Trainer:
                     inputs_all = [pose_feats[f_i], pose_feats[0]]
                     inputs_all_reverse = [pose_feats[0], pose_feats[f_i]]
 
-                    print(len(inputs_all))
-                    print(len(inputs_all_reverse))
+                    #print(len(inputs_all))
+                    #print(len(inputs_all_reverse))
                     
                     # OF Prediction
                     position_inputs = self.models["position_encoder"](torch.cat(inputs_all, 1))
                     position_inputs_reverse = self.models["position_encoder"](torch.cat(inputs_all_reverse, 1))
 
-                    print(position_inputs[0].shape)
+                    #print(position_inputs[0].shape)
 
                     outputs_0 = self.models["position"](position_inputs)
                     outputs_1 = self.models["position"](position_inputs_reverse)

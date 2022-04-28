@@ -42,7 +42,7 @@ class MonoDataset(data.Dataset):
                  frame_idxs,
                  num_scales,
                  is_train=False,
-                 img_ext='.png'):
+                 img_ext='.jpg'):
         super(MonoDataset, self).__init__()
 
         self.data_path = data_path
@@ -151,8 +151,8 @@ class MonoDataset(data.Dataset):
                 other_side = {"r": "l", "l": "r"}[side]
                 inputs[("color", i, -1)] = self.get_color(folder, frame_index, other_side, do_flip)
             else:
-                #inputs[("color", i, -1)] = self.get_color(folder, frame_index + i, side, do_flip)
-                inputs[("color", i, -1)] = self.get_color(folder, frame_index , side, do_flip)
+                inputs[("color", i, -1)] = self.get_color(folder, frame_index + i, side, do_flip)
+                #inputs[("color", i, -1)] = self.get_color(folder, frame_index , side, do_flip)
 
         # adjusting intrinsics to match each scale in the pyramid
         for scale in range(self.num_scales):

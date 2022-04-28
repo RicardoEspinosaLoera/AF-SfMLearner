@@ -42,7 +42,7 @@ class SCAREDRAWDataset(SCAREDDataset):
     def get_image_path(self, folder, frame_index, side):
         #f_str = "{:010d}{}".format(frame_index, self.img_ext)
         #image_path = os.path.join(self.data_path, folder, "image_0{}/data".format(self.side_map[side]), f_str)
-        f_str = frame_index + self.img_ext
+        f_str = str(frame_index) + self.img_ext
         image_path = os.path.join(self.data_path, folder, "/data", f_str)
         return image_path
 

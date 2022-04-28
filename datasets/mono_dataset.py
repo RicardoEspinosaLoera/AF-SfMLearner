@@ -23,7 +23,6 @@ def pil_loader(path):
 
 class MonoDataset(data.Dataset):
     """Superclass for monocular dataloaders
-
     Args:
         data_path
         filenames
@@ -42,7 +41,7 @@ class MonoDataset(data.Dataset):
                  frame_idxs,
                  num_scales,
                  is_train=False,
-                 img_ext='.jpg'):
+                 img_ext='.png'):
         super(MonoDataset, self).__init__()
 
         self.data_path = data_path
@@ -84,7 +83,6 @@ class MonoDataset(data.Dataset):
 
     def preprocess(self, inputs, color_aug):
         """Resize colour images to the required scales and augment if required
-
         We create the color_aug object in advance and apply the same augmentation to all
         images in this item. This ensures that all images input to the pose network receive the
         same augmentation.
@@ -108,21 +106,17 @@ class MonoDataset(data.Dataset):
 
     def __getitem__(self, index):
         """Returns a single training item from the dataset as a dictionary.
-
         Values correspond to torch tensors.
         Keys in the dictionary are either strings or tuples:
-
             ("color", <frame_id>, <scale>)          for raw colour images,
             ("color_aug", <frame_id>, <scale>)      for augmented colour images,
             ("K", scale) or ("inv_K", scale)        for camera intrinsics,
             "stereo_T"                              for camera extrinsics, and
             "depth_gt"                              for ground truth depth maps.
-
         <frame_id> is either:
             an integer (e.g. 0, -1, or 1) representing the temporal step relative to 'index',
         or
             "s" for the opposite image in the stereo pair.
-
         <scale> is an integer representing the scale of the image relative to the fullsize image:
             -1      images at native resolution as loaded from disk
             0       images resized to (self.width,      self.height     )
@@ -137,14 +131,16 @@ class MonoDataset(data.Dataset):
 
         line = self.filenames[index].split()
         folder = line[0]
-        
-        frame_index = line[1]
+
+        if len(line) == 3:
+            frame_index = int(line[1])
+        else:
+            frame_index = 0
 
         if len(line) == 3:
             side = line[2]
         else:
             side = None
-
 
         for i in self.frame_idxs:
             if i == "s":
@@ -152,7 +148,6 @@ class MonoDataset(data.Dataset):
                 inputs[("color", i, -1)] = self.get_color(folder, frame_index, other_side, do_flip)
             else:
                 inputs[("color", i, -1)] = self.get_color(folder, frame_index + i, side, do_flip)
-                #inputs[("color", i, -1)] = self.get_color(folder, frame_index , side, do_flip)
 
         # adjusting intrinsics to match each scale in the pyramid
         for scale in range(self.num_scales):
@@ -166,13 +161,11 @@ class MonoDataset(data.Dataset):
             inputs[("K", scale)] = torch.from_numpy(K)
             inputs[("inv_K", scale)] = torch.from_numpy(inv_K)
 
-        
         if do_color_aug:
-            color_aug = transforms.ColorJitter( self.brightness, self.contrast, self.saturation, self.hue)
+            color_aug = transforms.ColorJitter.get_params(
+                self.brightness, self.contrast, self.saturation, self.hue)
         else:
             color_aug = (lambda x: x)
-        
-        #print(type(color_aug))
 
         self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:

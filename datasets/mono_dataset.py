@@ -168,6 +168,8 @@ class MonoDataset(data.Dataset):
         else:
             color_aug = (lambda x: x)
 
+        print(type(color_aug))
+        
         self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:
             del inputs[("color", i, -1)]

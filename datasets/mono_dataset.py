@@ -166,10 +166,10 @@ class MonoDataset(data.Dataset):
             color_aug = transforms.ColorJitter.get_params(
                 self.brightness, self.contrast, self.saturation, self.hue)
         else:
-            color_aug = (lambda x: x)
+            color_aug = lambda x: x
 
         print(type(color_aug))
-        
+
         self.preprocess(inputs, color_aug)
         for i in self.frame_idxs:
             del inputs[("color", i, -1)]

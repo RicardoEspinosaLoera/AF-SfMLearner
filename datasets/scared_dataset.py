@@ -26,6 +26,7 @@ class SCAREDDataset(MonoDataset):
         return False
 
     def get_color(self, folder, frame_index, side, do_flip):
+        print(folder)
         print(self.get_image_path(folder, frame_index, side))
         color = self.loader(self.get_image_path(folder, frame_index, side))
         

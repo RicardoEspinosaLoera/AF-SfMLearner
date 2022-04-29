@@ -344,10 +344,10 @@ class Trainer:
 
                         outputs[("refined", scale, f_i)] = (outputs[("transform", "high", scale, f_i)] * outputs[("occu_mask_backward", 0, f_i)].detach()  + inputs[("color", 0, 0)])
                         outputs[("refined", scale, f_i)] = torch.clamp(outputs[("refined", scale, f_i)], min=0.0, max=1.0)
-                        cv2.imwrite(save_path, outputs[("refined", scale, f_i)])
+
                     # Input for PoseNet
                     pose_inputs = [self.models["pose_encoder"](torch.cat(inputs_all, 1))]
-                    axisangle, translation = self.models["pose"](pose_inputs)[0]
+                    axisangle, translation = self.models["pose"](pose_inputs)
 
                     outputs[("axisangle", 0, f_i)] = axisangle
                     outputs[("translation", 0, f_i)] = translation

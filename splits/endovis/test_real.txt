@@ -540,7 +540,6 @@ Sequence_11-46-52-727 Image_803948 l
 Sequence_11-46-52-727 Image_803988 l
 Sequence_11-46-52-727 Image_804028 l
 Sequence_11-46-52-727 Image_804068 l
-Sequence_11-46-52-727 Image_804108 l
 Sequence_11-46-52-727 Image_804148 l
 Sequence_11-46-52-727 Image_804188 l
 Sequence_11-46-52-727 Image_804228 l

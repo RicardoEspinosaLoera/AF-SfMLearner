@@ -875,7 +875,6 @@ Sequence_11-46-52-727 Image_818248 l
 Sequence_11-46-52-727 Image_818285 l
 Sequence_11-46-52-727 Image_818322 l
 Sequence_11-46-52-727 Image_818359 l
-Sequence_11-46-52-727 Image_818396 l
 Sequence_11-46-52-727 Image_818432 l
 Sequence_11-46-52-727 Image_818469 l
 Sequence_11-46-52-727 Image_818506 l

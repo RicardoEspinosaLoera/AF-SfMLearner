@@ -191,7 +191,7 @@ def evaluate(opt):
         gt_height, gt_width = gt_depth.shape[:2]
 
         pred_disp = pred_disps[i]
-        disp = self.colormap(pred_disp)
+        disp = colormap(pred_disp)
         wandb.log({"disp_testing": wandb.Image(disp.transpose(1, 2, 0))},step=i)
         pred_disp = cv2.resize(pred_disp, (gt_width, gt_height))
         pred_depth = 1/pred_disp

@@ -73,10 +73,12 @@ def evaluate(opt):
     """
     assert os.path.isdir(opt.load_weights_folder), \
         "Cannot find a folder at {}".format(opt.load_weights_folder)
-
+    """
     filenames = readlines(
         os.path.join(os.path.dirname(__file__), "splits", "endovis",
-                     "test_files_sequence2.txt"))
+                     "test_files_sequence2.txt"))"""
+    splits_dir = os.path.join(os.path.dirname(__file__), "splits")
+    filenames = readlines(os.path.join(splits_dir, opt.eval_split, "test_files.txt"))
 
     dataset = SCAREDRAWDataset(opt.data_path, filenames, opt.height, opt.width,
                                [0, 1], 4, is_train=False)

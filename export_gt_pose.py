@@ -38,7 +38,7 @@ def export_gt_depths_SCARED():
         path_0 = os.path.join(
                 opt.data_path,
                 folder,
-                "image_02/data/frame_data",
+                "data/frame_data",
                 f_str_0)
         path_1 = os.path.join(
                 opt.data_path,

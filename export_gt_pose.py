@@ -43,7 +43,7 @@ def export_gt_depths_SCARED():
         path_1 = os.path.join(
                 opt.data_path,
                 folder,
-                "image_02/data/frame_data",
+                "data/frame_data",
                 f_str_1)
         with open(path_0, 'r') as path0:
             data_0 = json.load(path0)

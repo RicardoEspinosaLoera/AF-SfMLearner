@@ -78,7 +78,7 @@ def evaluate(opt):
         os.path.join(os.path.dirname(__file__), "splits", "endovis",
                      "test_files_sequence2.txt"))"""
     splits_dir = os.path.join(os.path.dirname(__file__), "splits")
-    filenames = readlines(os.path.join(splits_dir, opt.eval_split, "test_files_sequence1.txt"))
+    filenames = readlines(os.path.join(splits_dir, opt.eval_split, "test_files_sequence2.txt"))
 
     dataset = SCAREDRAWDataset(opt.data_path, filenames, opt.height, opt.width,
                                [0, 1], 4, is_train=False)
@@ -120,7 +120,7 @@ def evaluate(opt):
 
     pred_poses = np.concatenate(pred_poses)
 
-    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses1.npz")
+    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses2.npz")
     gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
 
     ates = []
@@ -138,12 +138,12 @@ def evaluate(opt):
 
     print("\n   Trajectory error: {:0.4f}, std: {:0.4f}\n".format(np.mean(ates), np.std(ates)))
     print("\n   Rotation error: {:0.4f}, std: {:0.4f}\n".format(np.mean(res), np.std(res)))
-    split_folder = os.path.join(os.path.dirname(__file__), "splits", opt.split)
-    output_path = os.path.join(split_folder, "pred_poses1_Mv.npz")
+    #split_folder = os.path.join(os.path.dirname(__file__), "splits", opt.split)
+    #output_path = os.path.join(split_folder, "pred_poses1_Mv.npz")
 
-    print("Saving to {}".format(opt.split))
+    #print("Saving to {}".format(opt.split))
 
-    np.savez_compressed(output_path, data=np.array(pred_poses))
+    #np.savez_compressed(output_path, data=np.array(pred_poses))
 
 
 if __name__ == "__main__":

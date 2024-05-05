@@ -139,7 +139,7 @@ def evaluate(opt):
     print("\n   Trajectory error: {:0.4f}, std: {:0.4f}\n".format(np.mean(ates), np.std(ates)))
     print("\n   Rotation error: {:0.4f}, std: {:0.4f}\n".format(np.mean(res), np.std(res)))
     split_folder = os.path.join(os.path.dirname(__file__), "splits", opt.split)
-    output_path = os.path.join(split_folder, "pred_poses1_ii.npz")
+    output_path = os.path.join(split_folder, "pred_poses1_iit.npz")
 
     print("Saving to {}".format(opt.split))
 

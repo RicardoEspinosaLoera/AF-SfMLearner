@@ -78,7 +78,7 @@ def evaluate(opt):
         os.path.join(os.path.dirname(__file__), "splits", "endovis",
                      "test_files_sequence2.txt"))"""
     splits_dir = os.path.join(os.path.dirname(__file__), "splits")
-    filenames = readlines(os.path.join(splits_dir, opt.eval_split, "test_files.txt"))
+    filenames = readlines(os.path.join(splits_dir, opt.eval_split, "test_files_sequence1.txt"))
 
     dataset = SCAREDRAWDataset(opt.data_path, filenames, opt.height, opt.width,
                                [0, 1], 4, is_train=False)
@@ -120,7 +120,7 @@ def evaluate(opt):
 
     pred_poses = np.concatenate(pred_poses)
 
-    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses.npz")
+    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses1.npz")
     gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
 
     ates = []

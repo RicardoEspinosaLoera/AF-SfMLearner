@@ -120,7 +120,7 @@ def evaluate(opt):
 
     pred_poses = np.concatenate(pred_poses)
 
-    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses_sq2.npz")
+    gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses.npz")
     gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
 
     ates = []

@@ -6,10 +6,10 @@ import numpy as np
 
 # load data from file
 # you replace this using with open
-gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "curve", "gt_poses.npz")
+gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses1.npz")
 gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
 
-our_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "curve", "pose_our.npz")
+our_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "pred_poses1_af.npz")
 our_local_poses = np.load(our_path, fix_imports=True, encoding='latin1')["data"]
 
 

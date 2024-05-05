@@ -24,7 +24,7 @@ def export_gt_depths_SCARED():
     opt = parser.parse_args()
 
     split_folder = os.path.join(os.path.dirname(__file__), "splits", opt.split)
-    lines = readlines(os.path.join(split_folder, "test_files.txt"))
+    lines = readlines(os.path.join(split_folder, "test_files_sequence1.txt"))
     print("Exporting ground truth depths for {}".format(opt.split))
 
     gt_Ts = []
@@ -55,7 +55,7 @@ def export_gt_depths_SCARED():
 
         gt_Ts.append(T)
 
-    output_path = os.path.join(split_folder, "gt_poses.npz")
+    output_path = os.path.join(split_folder, "gt_poses1.npz")
 
     print("Saving to {}".format(opt.split))
 

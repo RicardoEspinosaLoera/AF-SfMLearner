@@ -9,7 +9,7 @@ import numpy as np
 gt_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "gt_poses1.npz")
 gt_local_poses = np.load(gt_path, fix_imports=True, encoding='latin1')["data"]
 
-our_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "pred_poses1_af.npz")
+our_path = os.path.join(os.path.dirname(__file__), "splits", "endovis", "pred_poses1_iit.npz")
 our_local_poses = np.load(our_path, fix_imports=True, encoding='latin1')["data"]
 
 
